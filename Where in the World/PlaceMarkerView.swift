@@ -12,7 +12,6 @@ import MapKit
 class PlaceMarkerView: MKMarkerAnnotationView {
     override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
         super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-
         canShowCallout = true
         rightCalloutAccessoryView = UIButton(type: .infoLight)
     }
@@ -22,8 +21,9 @@ class PlaceMarkerView: MKMarkerAnnotationView {
     }
     override var annotation: MKAnnotation? {
         willSet {
+            clusteringIdentifier = "Place"
             displayPriority = .defaultLow
-            glyphImage = UIImage(named: "mappin.png")
+            glyphImage = UIImage(named: "pin.png")
         }
     }
 }

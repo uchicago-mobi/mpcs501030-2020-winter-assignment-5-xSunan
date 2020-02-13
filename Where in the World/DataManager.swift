@@ -30,7 +30,6 @@ public class DataManager {
 
 
     public static let sharedInstance = DataManager()
-    
 
     fileprivate init(){
         defaults.set([String](), forKey: "faveList")
@@ -48,17 +47,18 @@ public class DataManager {
     }
     
     func saveFavorites(location: String) {
+        /* store the new favorites to the list in UserDefault*/
         var faveList = defaults.object(forKey: "faveList") as! [String]
         faveList.append(location)
         defaults.set(faveList, forKey: "faveList")
         
     }
     func deleteFavorite(location: String) {
+        /* delete the new favorites to the list in UserDefault*/
         var faveList = defaults.object(forKey: "faveList") as! [String]
         if let index = faveList.firstIndex(of: location) {
             faveList.remove(at: index)
             defaults.set(faveList, forKey: "faveList")
         }
     }
-    func listFavorites() {}
 }

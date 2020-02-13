@@ -25,8 +25,10 @@ class MapViewController: UIViewController, PlacesFavoritesDelegate, CLLocationMa
         performSegue(withIdentifier: "showFave", sender: self)
     }
     
+    /* initilaze locationManager*/
     var locationManager = CLLocationManager()
     
+    /* record the annotations and regions for each place*/
     var annotations = [String: Place]()
     var regions = [CLCircularRegion]()
     
@@ -34,7 +36,7 @@ class MapViewController: UIViewController, PlacesFavoritesDelegate, CLLocationMa
         super.viewDidLoad()
         mapView.showsCompass = false
         mapView.pointOfInterestFilter = .excludingAll
-        //mapView.showsUserLocation = true
+        
         /* Load the data from data.plist*/
         DataManager.sharedInstance.loadAnnotationFromPlist()
         
@@ -48,13 +50,13 @@ class MapViewController: UIViewController, PlacesFavoritesDelegate, CLLocationMa
         self.infoView.alpha = 0
         infoDescription.lineBreakMode = .byWordWrapping
         infoDescription.numberOfLines = 0
+        self.star.tintColor = UIColor.yellow
         
         /* LocationManager setup*/
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        checkPermissions()
-        locationManager.requestWhenInUseAuthorization()
+        self.checkPermissions()
         if CLLocationManager.locationServicesEnabled() {
             locationManager.startUpdatingLocation()
         }
@@ -91,7 +93,7 @@ class MapViewController: UIViewController, PlacesFavoritesDelegate, CLLocationMa
             locationManager.startUpdatingLocation()
             return
         default:
-            return
+            locationManager.requestWhenInUseAuthorization()
         }
     }
     
@@ -99,12 +101,10 @@ class MapViewController: UIViewController, PlacesFavoritesDelegate, CLLocationMa
                          didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedAlways, .authorizedWhenInUse:
-            print("Authorized!")
+            return
         case .notDetermined:
-            print("We need to request authorization")
             manager.requestWhenInUseAuthorization()
         default:
-            print("Not authorized :(")
             manager.requestWhenInUseAuthorization()
         }
     }
@@ -139,7 +139,7 @@ class MapViewController: UIViewController, PlacesFavoritesDelegate, CLLocationMa
     
 extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        let annotation = annotation as! Place
+        if let annotation = annotation as? Place {
             let identifier = "CustomPin"
             
             var view: PlaceMarkerView
@@ -149,27 +149,37 @@ extension MapViewController: MKMapViewDelegate {
                 view = dequeuedView
             } else {
                 view = PlaceMarkerView(annotation: annotation, reuseIdentifier: identifier)
-//                view.canShowCallout = true
-//                view.calloutOffset = CGPoint(x:-5, y:-5)
-//                view.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
-//                view.leftCalloutAccessoryView = UIImageView(image: UIImage(named: "pin.png"))
+                annotation.title = annotation.name
+                view.canShowCallout = true
+                view.calloutOffset = CGPoint(x:-5, y:-5)
+                view.rightCalloutAccessoryView!.isHidden = true;
+                view.leftCalloutAccessoryView = UIImageView(image: UIImage(named: "mappin.png"))
             }
             return view
+        } else {
+            return nil
+        }
+        
     }
     
     // when the annotation is tapped
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         let faveList = UserDefaults.standard.object(forKey: "faveList") as![String]
-        let annotation = view.annotation as! Place
-        self.infoView.alpha = 1
-        self.titleName.text = annotation.name
-        self.infoDescription.text = annotation.longDescription
-        if faveList.contains(self.titleName.text!) {
-            self.star.isSelected = true
-        } else {
-            self.star.isSelected = false
+        
+        if let annotation = view.annotation as? Place {
+            annotation.title = annotation.name
+            self.infoView.alpha = 1
+            self.titleName.text = annotation.name
+            self.infoDescription.text = annotation.longDescription
+            
+            if faveList.contains(self.titleName.text!) {
+                self.star.isSelected = true
+            } else {
+                self.star.isSelected = false
+            }
+            self.star.addTarget(self, action: #selector(starTapped), for: .touchDown)
         }
-        self.star.addTarget(self, action: #selector(starTapped), for: .touchDown)
+        
     }
     
     // When the star is tapped
@@ -186,11 +196,7 @@ extension MapViewController: MKMapViewDelegate {
             DataManager.sharedInstance.saveFavorites(location: self.titleName.text!)
             self.star.isSelected = true
             print(faveList)
-
-
         }
     }
-   
-
 
 }

@@ -24,7 +24,6 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        // Do any additional setup after loading the view.
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -42,8 +41,5 @@ class FavoritesViewController: UIViewController, UITableViewDataSource, UITableV
         self.delegate?.favoritePlace(name: faveList[indexPath.row])
         dismiss(animated: true, completion: nil)
     }
-    
-
-    
 
 }

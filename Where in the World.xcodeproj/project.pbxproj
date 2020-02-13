@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9509533223F4DFB100E2213C /* mappin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9509533123F4DFB100E2213C /* mappin.png */; };
 		9575BD4723F332C900C6321C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575BD4623F332C900C6321C /* AppDelegate.swift */; };
 		9575BD4923F332C900C6321C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575BD4823F332C900C6321C /* SceneDelegate.swift */; };
 		9575BD4B23F332C900C6321C /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575BD4A23F332C900C6321C /* MapViewController.swift */; };
@@ -21,10 +20,10 @@
 		9575BD6323F34B6000C6321C /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575BD6223F34B6000C6321C /* DataManager.swift */; };
 		9575BD6723F39E8600C6321C /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575BD6623F39E8600C6321C /* pin.png */; };
 		9575BD6923F3C0B200C6321C /* PlacesFavoritesDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9575BD6823F3C0B200C6321C /* PlacesFavoritesDelegate.swift */; };
+		957F199A23F5E0A8008AF5EA /* mappin.png in Resources */ = {isa = PBXBuildFile; fileRef = 957F199923F5E0A8008AF5EA /* mappin.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9509533123F4DFB100E2213C /* mappin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mappin.png; sourceTree = "<group>"; };
 		9575BD4323F332C900C6321C /* Where in the World.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Where in the World.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9575BD4623F332C900C6321C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9575BD4823F332C900C6321C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -42,6 +41,7 @@
 		9575BD6823F3C0B200C6321C /* PlacesFavoritesDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlacesFavoritesDelegate.swift; sourceTree = "<group>"; };
 		9575BD6A23F4AA0F00C6321C /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Location.gpx; sourceTree = "<group>"; };
 		9575BD6B23F4AA8600C6321C /* Location.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = Location.gpx; path = "Where in the World/Location.gpx"; sourceTree = "<group>"; };
+		957F199923F5E0A8008AF5EA /* mappin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mappin.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 				9575BD5423F332D100C6321C /* Info.plist */,
 				9575BD5A23F3441400C6321C /* Data.plist */,
 				9575BD6623F39E8600C6321C /* pin.png */,
-				9509533123F4DFB100E2213C /* mappin.png */,
+				957F199923F5E0A8008AF5EA /* mappin.png */,
 				9575BD6A23F4AA0F00C6321C /* Location.gpx */,
 			);
 			path = "Where in the World";
@@ -157,7 +157,7 @@
 				9575BD5023F332D100C6321C /* Assets.xcassets in Resources */,
 				9575BD5B23F3441400C6321C /* Data.plist in Resources */,
 				9575BD6723F39E8600C6321C /* pin.png in Resources */,
-				9509533223F4DFB100E2213C /* mappin.png in Resources */,
+				957F199A23F5E0A8008AF5EA /* mappin.png in Resources */,
 				9575BD4E23F332C900C6321C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
